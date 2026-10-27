@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#0f4c5c"><link rel="manifest" href="manifest.json"><link rel="icon" href="icon.svg"><title>Nasser</title>
+<style>
+:root{--t:#0f4c5c;--s:#e0a526;--bg:#eaf0ef;--ink:#16252a;--ln:#cfdcda;--rd:#b42318;--gn:#157347}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 "Segoe UI",Roboto,Tahoma,"Noto Naskh Arabic",system-ui,sans-serif}
+header{position:sticky;top:0;z-index:5;background:var(--t);color:#fff;display:flex;flex-wrap:wrap;gap:10px;align-items:center;padding:8px 14px;border-block-end:4px solid var(--s)}
+.brand{font:700 1.6rem Georgia,"Noto Naskh Arabic",serif;margin-inline-end:auto}#sy{font-size:.8rem;opacity:.85}#sy.ok{color:#8ff0b4}
+nav{display:flex;gap:6px}nav button{background:transparent;color:#fff;border-color:#ffffff40;display:flex;gap:6px;align-items:center}nav button.on{background:var(--s);color:#10261f;border-color:var(--s);font-weight:600}
+header>button{background:transparent;color:#fff;border-color:#ffffff55}
+main{max-width:1000px;margin:14px auto;padding:0 12px}
+button{font:inherit;min-height:42px;padding:6px 12px;border:1px solid var(--ln);border-radius:10px;background:#fff;color:var(--ink);cursor:pointer}button.pri{background:var(--t);color:#fff;border-color:var(--t)}
+input,select,textarea{font:inherit;width:100%;min-height:42px;padding:8px 10px;border:1px solid var(--ln);border-radius:10px;background:#fff}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--s);outline-offset:1px}
+label{display:block;font-size:.85rem;color:#45605f;margin-block-end:10px}label input,label select,label textarea{margin-block-start:3px}
+.card{background:#fff;border:1px solid var(--ln);border-radius:12px;padding:14px;margin-block-end:14px}.card h2,h2.h{margin:0 0 10px;font:700 1.15rem Georgia,serif}h2.h{margin-block-start:18px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}.bar{display:flex;gap:8px;margin-block-end:10px}
+.it{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--ln);border-radius:12px;padding:8px 12px;margin-block-end:8px}.it.lo{border-inline-start:5px solid var(--rd)}.it .i{flex:1;min-width:0}
+small{display:block;color:#5b7170}.bl{display:block}.sp{display:flex;justify-content:space-between;align-items:center;gap:8px}.ln{display:flex;align-items:center;gap:8px;margin-block-start:6px}.ln input{width:92px}
+.th{width:46px;height:46px;border-radius:8px;object-fit:cover;background:#dfe9e7;display:grid;place-items:center;flex:none}.pv{max-width:120px;max-height:120px;border-radius:8px;display:block;margin-block-end:8px}.pv[hidden]{display:none}
+.it>button{padding:4px 10px}.neg{color:var(--rd);font-weight:600}.pos{color:var(--gn)}.row{display:flex;gap:8px;margin-block-start:8px;flex-wrap:wrap}.row button{flex:1}
+.tots{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;align-items:end;margin-block-start:10px}.lg{max-width:360px;margin:12vh auto}
+dialog{border:0;border-radius:14px;padding:18px;width:min(440px,94vw)}dialog::backdrop{background:#0a35408c}
+#ts{position:fixed;inset-inline:16px;bottom:24px;margin-inline:auto;width:fit-content;max-width:90vw;background:#0a3540;color:#fff;padding:10px 16px;border-radius:10px;opacity:0;pointer-events:none;transition:opacity .2s;z-index:20}#ts.on{opacity:1}
+#pr{display:none}.inv{font-family:Georgia,"Noto Naskh Arabic",serif;color:#000;padding:8px}.ih{display:flex;gap:16px;align-items:center;border-block-end:3px solid #000;padding-block-end:10px;margin-block-end:14px}.ih img{max-height:90px;max-width:160px}.hn{font-size:1.8rem}.meta{margin-inline-start:auto;text-align:end}
+.inv table{width:100%;border-collapse:collapse}.inv th,.inv td{border-block-end:1px solid #999;padding:5px 8px;text-align:start}.inv .r{text-align:end;line-height:1.8}
+@media print{body>*:not(#pr){display:none!important}#pr{display:block}}
+@media(max-width:700px){nav{position:fixed;inset-inline:0;bottom:0;z-index:9;background:#fff;border-block-start:1px solid var(--ln);padding:6px 8px calc(6px + env(safe-area-inset-bottom))}nav button{flex:1;flex-direction:column;gap:0;background:#fff;color:var(--ink);border-color:var(--ln);font-size:.75rem;padding:4px}nav button.on{background:var(--s);border-color:var(--s)}main{padding-block-end:90px}#ts{bottom:84px}}
+</style></head><body>
+<header><div class="brand">Nasser</div><span id="sy"></span><nav id="nav"></nav><button id="lg" onclick="D.lang=D.lang=='fr'?'ar':'fr';sv();R()"></button></header>
+<main id="app"></main><dialog id="dlg"></dialog><div id="pr"></div><div id="ts"></div>
+<script>
+const SB='https://tovtejjyujztnsblpias.supabase.co',KEY='sb_publishable_XEXIPGEPrl-Q1f8D48ZQLA_NFxKqaEC',DOM='@nasser.app';
+const $=s=>document.querySelector(s);
+const blank=()=>({id:null,no:null,cli:'',lines:[],disc:0,paid:''});
+let D={docs:{},pend:{},last:'1970-01-01T00:00:00Z',lang:'fr'},A=null,SY='off',V='fac',Q='',Qf='',C=blank(),IMG='',LOGO,ST={},BAL={},busy=0;
+try{A=JSON.parse(localStorage.getItem('na'))}catch(x){}
+const TX={fr:{fac:'Factures',art:'Articles',cli:'Clients',set:'Réglages',n:'Nom',b:'Code-barres',q:'Stock',p:'Prix de vente',m:'Seuil d’alerte',ph:'Téléphone',ad:'Adresse',l:'Plafond de crédit (0 = illimité)',bal:'Crédit dû',add:'Ajouter',save:'Enregistrer',savep:'Enregistrer et imprimer',cancel:'Annuler',search:'Rechercher ou scanner un article…',in:'Entrée de stock',out:'Sortie de stock',pay:'Règlement',amt:'Montant',total:'Total',paid:'Payé (vide = tout payé)',rest:'Reste à crédit',disc:'Remise',walk:'Client comptoir',newf:'Nouvelle facture / commande',none:'Rien à afficher',confirm:'Confirmer la suppression ?',nostock:'Stock insuffisant',needcli:'Choisissez un client pour un paiement partiel',limit:'Plafond de crédit dépassé. Continuer ?',nm:'Le nom est obligatoire',dup:'Ce code-barres existe déjà',ok:'Enregistré',cur:'DH',nl:'Facture vide ou quantité invalide',stmt:'Relevé',note:'Note',hdr:'En-tête des factures (une information par ligne)',logo:'Logo',photo:'Photo',user:'Identifiant',pw:'Mot de passe',login:'Se connecter',bad:'Identifiant ou mot de passe incorrect, ou pas de connexion',lo:'Se déconnecter',lo2:'Des modifications ne sont pas encore synchronisées et seront perdues. Continuer ?',cfg:'Renseignez SB et KEY au début de index.html',sok:'Synchronisé',soff:'Hors ligne',thanks:'Merci de votre confiance',st:'Stockage local impossible',solde:'Solde du compte',qt:'Qté',pu:'Prix',fa:'Facture',c1:'Client'},
+ar:{fac:'الفواتير',art:'السلع',cli:'الزبائن',set:'الإعدادات',n:'الاسم',b:'الباركود',q:'المخزون',p:'سعر البيع',m:'حد التنبيه',ph:'الهاتف',ad:'العنوان',l:'سقف الدين (0 = بلا حد)',bal:'الدين',add:'إضافة',save:'حفظ',savep:'حفظ وطباعة',cancel:'إلغاء',search:'بحث أو مسح باركود…',in:'إدخال مخزون',out:'إخراج مخزون',pay:'تسديد',amt:'المبلغ',total:'المجموع',paid:'المدفوع (فارغ = مدفوع كليا)',rest:'المتبقي (دين)',disc:'تخفيض',walk:'زبون عادي',newf:'فاتورة / طلبية جديدة',none:'لا شيء للعرض',confirm:'تأكيد الحذف؟',nostock:'المخزون غير كاف',needcli:'اختر زبونا للدفع الجزئي',limit:'تم تجاوز سقف الدين. المتابعة؟',nm:'الاسم مطلوب',dup:'هذا الباركود مستعمل',ok:'تم الحفظ',cur:'د.م.',nl:'فاتورة فارغة أو كمية غير صحيحة',stmt:'كشف الحساب',note:'ملاحظة',hdr:'ترويسة الفواتير (معلومة في كل سطر)',logo:'الشعار',photo:'صورة',user:'المعرف',pw:'كلمة السر',login:'دخول',bad:'المعرف أو كلمة السر غير صحيحة، أو لا يوجد اتصال',lo:'تسجيل الخروج',lo2:'هناك تعديلات لم تتم مزامنتها وستضيع. المتابعة؟',cfg:'املأ SB و KEY في بداية index.html',sok:'متزامن',soff:'غير متصل',thanks:'شكرا لثقتكم',st:'تعذر التخزين المحلي',solde:'رصيد الحساب',qt:'الكمية',pu:'السعر',fa:'فاتورة',c1:'الزبون'}};
+const t=k=>TX[D.lang][k]||k,uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+const e=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const m=x=>(+x||0).toFixed(2),r2=x=>Math.round(x*100)/100,now=()=>{const d=new Date();return new Date(d-d.getTimezoneOffset()*6e4).toISOString().slice(0,16).replace('T',' ')};
+const mt=(s,q)=>!q||s.toLowerCase().includes(q.trim().toLowerCase()),by=(x,y)=>x.n.localeCompare(y.n);
+function toast(s){const x=$('#ts');x.textContent=s;x.className='on';clearTimeout(toast.h);toast.h=setTimeout(()=>x.className='',2600)}
+/* Stockage local (IndexedDB) */
+const idb=f=>new Promise((ok,ko)=>{const r=indexedDB.open('nasser',1);r.onupgradeneeded=()=>r.result.createObjectStore('k');r.onerror=()=>ko();r.onsuccess=()=>{const tx=r.result.transaction('k','readwrite'),q=f(tx.objectStore('k'));tx.oncomplete=()=>ok(q.result);tx.onerror=()=>ko()}});
+const sv=()=>idb(s=>s.put(D,'d')).catch(()=>toast(t('st')));
+const put=(kind,id,data,del)=>{D.docs[id]={id,kind,data,del:!!del};D.pend[id]=1;sv();clearTimeout(put.h);put.h=setTimeout(sync,800)};
+const L=k=>Object.values(D.docs).filter(d=>d.kind==k&&!d.del);
+const AR=()=>L('a').map(d=>({id:d.id,...d.data})).sort(by),CL=()=>L('c').map(d=>({id:d.id,...d.data})).sort(by);
+const CF=()=>(D.docs.cfg&&!D.docs.cfg.del&&D.docs.cfg.data)||{h:'NASSER',logo:''};
+function calcS(){ST={};BAL={};Object.values(D.docs).forEach(d=>{if(d.del)return;if(d.kind=='m')ST[d.data.a]=(ST[d.data.a]||0)+d.data.q;else if(d.kind=='g')BAL[d.data.c]=r2((BAL[d.data.c]||0)+d.data.a)})}
+/* Connexion et synchronisation (Supabase, sans bibliothèque) */
+function tok(j){A={at:j.access_token,rt:j.refresh_token};localStorage.setItem('na',JSON.stringify(A))}
+async function login(u,p){const r=await fetch(SB+'/auth/v1/token?grant_type=password',{method:'POST',headers:{apikey:KEY,'Content-Type':'application/json'},body:JSON.stringify({email:u.includes('@')?u:u+DOM,password:p})});if(!r.ok)throw 0;tok(await r.json())}
+async function api(path,o={},retry=1){const r=await fetch(SB+path,{...o,headers:{apikey:KEY,Authorization:'Bearer '+A.at,'Content-Type':'application/json',...(o.headers||{})}});
+ if(r.status==401&&retry){const g=await fetch(SB+'/auth/v1/token?grant_type=refresh_token',{method:'POST',headers:{apikey:KEY,'Content-Type':'application/json'},body:JSON.stringify({refresh_token:A.rt})});if(g.ok){tok(await g.json());return api(path,o,0)}A=null;localStorage.removeItem('na');R()}return r}
+async function sync(){if(!A||busy)return;busy=1;let ch=0;
+ try{const ids=Object.keys(D.pend),sn=ids.map(i=>D.docs[i]);
+  if(ids.length){const r=await api('/rest/v1/docs',{method:'POST',headers:{Prefer:'resolution=merge-duplicates,return=minimal'},body:JSON.stringify(sn.map(d=>({id:d.id,kind:d.kind,data:d.data,del:!!d.del})))});if(!r.ok)throw 0;sn.forEach(d=>{if(D.docs[d.id]===d)delete D.pend[d.id]})}
+  for(;;){const r=await api('/rest/v1/docs?select=*&order=updated_at.asc&limit=200&updated_at=gt.'+encodeURIComponent(D.last));if(!r.ok)throw 0;const rows=await r.json();
+   rows.forEach(x=>{if(!D.pend[x.id]){D.docs[x.id]={id:x.id,kind:x.kind,data:x.data,del:x.del};ch=1}D.last=x.updated_at});if(rows.length<200)break}
+  SY='ok'}catch(x){SY='off'}
+ busy=0;sv();if(ch&&!/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName))R();else stat();if(SY=='ok'&&Object.keys(D.pend).length)setTimeout(sync,500)}
+function stat(){const n=Object.keys(D.pend).length,s=$('#sy'),ok=SY=='ok'&&!n;s.textContent=!A?'':(ok?'● '+t('sok'):'○ '+t('soff')+(n?' ('+n+')':''));s.className=ok?'ok':''}
+async function go(f){try{await login(f.elements.u.value.trim().toLowerCase(),f.elements.p.value);await sync();R()}catch(x){$('#le').textContent=t('bad')}return false}
+async function lo(){if(Object.keys(D.pend).length&&!confirm(t('lo2')))return;localStorage.removeItem('na');A=null;D={docs:{},pend:{},last:'1970-01-01T00:00:00Z',lang:D.lang};await sv();R()}
+/* Fenêtres et images */
+function modal(ti,fs,v,ok,x){const d=$('#dlg');d.innerHTML=`<form><h3>${e(ti)}</h3>${fs.map(([k,l,y])=>`<label>${l}<input name="${k}" type="${y?'number':'text'}" step="any" inputmode="${y?'decimal':'text'}" autocomplete="off" value="${e(v[k]??'')}"></label>`).join('')}${x||''}<div class="row"><button class="pri">${t('save')}</button><button type="button" onclick="dlg.close()">${t('cancel')}</button></div></form>`;
+ const f=d.querySelector('form');f.onkeydown=ev=>{if(ev.key=='Enter'&&ev.target.tagName=='INPUT'&&ev.target.type!='file'){const i=[...f.querySelectorAll('input:not([type=file])')],k=i.indexOf(ev.target);if(k<i.length-1){ev.preventDefault();i[k+1].focus()}}};
+ f.onsubmit=ev=>{ev.preventDefault();const o={};fs.forEach(([k,,y])=>{const s=f.elements[k].value.trim();o[k]=y?(+s||0):s});if(ok(o)!==false)d.close()};d.showModal();f.elements[fs[0][0]].focus()}
+function pick(i,sz,cb){const f=i.files[0];if(!f)return;const im=new Image();im.onload=()=>{const k=Math.min(1,sz/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=Math.round(im.width*k);c.height=Math.round(im.height*k);c.getContext('2d').drawImage(im,0,0,c.width,c.height);const u=c.toDataURL('image/jpeg',.75);cb(u);const p=$('#pv');p.src=u;p.hidden=false};im.src=URL.createObjectURL(f)}
+const th=a=>a.img?`<img class="th" src="${a.img}">`:'<span class="th">📦</span>';
+/* Articles */
+const artL=()=>AR().filter(a=>mt(a.n+' '+(a.b||''),Q)).map(a=>`<div class="it ${(ST[a.id]||0)<=a.m?'lo':''}">${th(a)}<div class="i"><b>${e(a.n)}</b><small>${e(a.b||'')} · ${m(a.p)} ${t('cur')} · ${t('q')} : <b>${ST[a.id]||0}</b></small></div><button onclick="mv('${a.id}',1)">＋</button><button onclick="mv('${a.id}',-1)">－</button><button onclick="ea('${a.id}')">✎</button><button onclick="da('${a.id}')">🗑</button></div>`).join('')||`<p>${t('none')}</p>`;
+function ea(id){const a=id?{...D.docs[id].data,q:ST[id]||0}:{q:0,m:5};IMG=a.img||'';
+ modal(a.n||t('add'),[['n',t('n')],['b',t('b')],['q',t('q'),1],['p',t('p'),1],['m',t('m'),1]],a,o=>{
+  if(!o.n){toast(t('nm'));return false}
+  if(o.b&&L('a').some(x=>x.id!=id&&x.data.b==o.b)){toast(t('dup'));return false}
+  const i=id||'a_'+uid(),q=o.q;delete o.q;put('a',i,{...o,img:IMG});
+  const dq=q-(id?ST[id]||0:0);if(dq)put('m','m_'+uid(),{a:i,q:dq,r:id?'±':'Stock initial',d:now()});R()},
+  `<img id="pv" class="pv" ${IMG?`src="${IMG}"`:'hidden'}><label>${t('photo')}<input type="file" accept="image/*" onchange="pick(this,320,v=>IMG=v)"></label><button type="button" onclick="IMG='';$('#pv').hidden=true">✕ ${t('photo')}</button>`)}
+function da(id){if(confirm(t('confirm'))){put('a',id,{},1);R()}}
+function mv(id,dir){modal((dir>0?t('in'):t('out'))+' — '+D.docs[id].data.n,[['q',t('q'),1],['r',t('note')]],{q:1},o=>{
+ if(!(o.q>0)||(dir<0&&o.q>(ST[id]||0))){toast(t('nostock'));return false}put('m','m_'+uid(),{a:id,q:dir*o.q,r:o.r,d:now()});R()})}
+/* Clients */
+const cliL=()=>CL().filter(c=>mt(c.n+' '+(c.p||''),Q)).map(c=>`<div class="it"><div class="i"><b>${e(c.n)}</b><small>${e(c.p||'')} ${e(c.a||'')}</small></div><b class="${BAL[c.id]>0?'neg':''}">${m(BAL[c.id])}</b><button onclick="pay('${c.id}')">💰</button><button onclick="stm('${c.id}')">📄</button><button onclick="ec('${c.id}')">✎</button><button onclick="dc('${c.id}')">🗑</button></div>`).join('')||`<p>${t('none')}</p>`;
+function ec(id){modal(id?D.docs[id].data.n:t('add'),[['n',t('n')],['p',t('ph')],['a',t('ad')],['l',t('l'),1]],id?D.docs[id].data:{},o=>{if(!o.n){toast(t('nm'));return false}put('c',id||'c_'+uid(),o);R()})}
+function dc(id){if(confirm(t('confirm'))){put('c',id,{},1);R()}}
+function pay(id){modal(t('pay')+' — '+D.docs[id].data.n+' ('+m(BAL[id])+')',[['a',t('amt'),1]],{a:BAL[id]>0?BAL[id]:''},o=>{if(!(o.a>0))return false;put('g','g_'+uid(),{c:id,a:-o.a,l:t('pay'),d:now()});R()})}
+function stm(id){const d=$('#dlg');d.innerHTML=`<h3>${e(D.docs[id].data.n)} — ${t('stmt')}</h3>${L('g').filter(x=>x.data.c==id).sort((x,y)=>x.data.d<y.data.d?1:-1).map(x=>`<div class="it"><div class="i">${x.data.d}<small>${e(x.data.l)}</small></div><b class="${x.data.a>0?'neg':'pos'}">${x.data.a>0?'+':''}${m(x.data.a)}</b></div>`).join('')||t('none')}<p><b>${t('bal')} : ${m(BAL[id])} ${t('cur')}</b></p><button onclick="dlg.close()">✕</button>`;d.showModal()}
+/* Factures / commandes */
+const calc=()=>{const sub=r2(C.lines.reduce((s,l)=>s+l.q*l.p,0)),total=r2(Math.max(0,sub-(+C.disc||0))),paid=C.paid===''?total:+C.paid;return{total,paid,rest:r2(total-paid)}};
+function tot(){const k=calc();C.lines.forEach((l,i)=>{const c=$('#lt'+i);if(c)c.textContent=m(l.q*l.p)});$('#tt').textContent=m(k.total);$('#rt').textContent=m(k.rest);$('#rt').className=k.rest>0?'neg':'';$('#pd').placeholder=m(k.total)}
+const sm=()=>Qf.trim()?AR().filter(a=>mt(a.n+' '+(a.b||''),Qf)).slice(0,8):[];
+const sr=()=>sm().map(a=>`<div class="it" onclick="addL('${a.id}')">${th(a)}<div class="i"><b>${e(a.n)}</b><small>${m(a.p)} ${t('cur')} · ${ST[a.id]||0}</small></div>＋</div>`).join('');
+function addL(id){const a=D.docs[id].data,l=C.lines.find(x=>x.id==id);l?l.q++:C.lines.push({id,n:a.n,q:1,p:a.p});Qf='';R();$('#sc').focus()}
+function sen(){const v=Qf.trim(),a=AR().find(x=>x.b&&x.b==v)||(sm().length==1?sm()[0]:null);if(a)addL(a.id)}
+const nextNo=()=>{const p='F'+now().slice(2,10).replace(/-/g,'');return p+'-'+String(Math.max(0,...L('f').filter(x=>x.data.no.startsWith(p)).map(x=>+x.data.no.split('-')[1]))+1).padStart(2,'0')};
+function saveF(prt){if(!C.lines.length||C.lines.some(l=>!(l.q>0)))return toast(t('nl'));
+ const o=C.id?D.docs[C.id].data:null,k=calc(),cl=C.cli?D.docs[C.cli]:null;
+ if(k.rest>0&&!cl)return toast(t('needcli'));
+ for(const l of C.lines){const old=o?o.lines.filter(x=>x.id==l.id).reduce((s,x)=>s+x.q,0):0;if((ST[l.id]||0)+old<l.q&&!confirm(t('nostock')+' : '+l.n+' — OK ?'))return}
+ if(cl&&cl.data.l>0&&(BAL[cl.id]||0)-(o&&o.c==C.cli?o.rest:0)+k.rest>cl.data.l&&!confirm(t('limit')))return;
+ const id=C.id||'f_'+uid(),d=o?o.d:now(),no=o?o.no:nextNo();
+ put('f',id,{no,d,c:C.cli,cn:cl?cl.data.n:t('walk'),lines:C.lines.map(l=>({...l})),disc:+C.disc||0,total:k.total,paid:k.paid,rest:k.rest});
+ C.lines.forEach((l,i)=>put('m',`m_${id}_${i}`,{a:l.id,q:-l.q,r:no,d}));
+ for(let i=C.lines.length;i<(o?o.lines.length:0);i++)put('m',`m_${id}_${i}`,{},1);
+ if(cl)put('g','g_'+id,{c:cl.id,a:k.rest,l:no,d});else if(o&&o.c)put('g','g_'+id,{},1);
+ C=blank();R();toast(t('ok')+' — '+no);if(prt)pr(id)}
+function ef(id){const o=D.docs[id].data;C={id,no:o.no,cli:o.c,lines:o.lines.map(l=>({...l})),disc:o.disc,paid:o.rest>0?o.paid:''};V='fac';R();scrollTo(0,0)}
+function df(id){if(!confirm(t('confirm')))return;const o=D.docs[id].data;put('f',id,{},1);o.lines.forEach((l,i)=>put('m',`m_${id}_${i}`,{},1));put('g','g_'+id,{},1);R()}
+function pr(id){const f=D.docs[id].data,c=CF(),hl=(c.h||'NASSER').split('\n');
+ $('#pr').innerHTML=`<div class="inv"><div class="ih">${c.logo?`<img src="${c.logo}">`:''}<div><b class="hn">${e(hl[0])}</b><br>${hl.slice(1).map(e).join('<br>')}</div><div class="meta"><b>${t('fa')} ${f.no}</b><br>${f.d}<br>${t('c1')} : ${e(f.cn)}</div></div><table><tr><th>${t('n')}<th>${t('qt')}<th>${t('pu')}<th>${t('total')}${f.lines.map(l=>`<tr><td>${e(l.n)}<td>${l.q}<td>${m(l.p)}<td>${m(l.q*l.p)}`).join('')}</table><p class="r">${f.disc?t('disc')+' : '+m(f.disc)+'<br>':''}<b>${t('total')} : ${m(f.total)} ${t('cur')}</b><br>${t('paid')} : ${m(f.paid)}<br>${t('rest')} : ${m(f.rest)}${f.c&&BAL[f.c]!=null?'<br>'+t('solde')+' : '+m(BAL[f.c]):''}</p><p style="text-align:center">${t('thanks')}</p></div>`;print()}
+function ss(){put('x','cfg',{h:$('#hh').value,logo:LOGO===undefined?CF().logo:LOGO});toast(t('ok'));R()}
+function nv(k){V=k;Q=Qf='';LOGO=undefined;R()}
+/* Vues */
+const bar=(f,n)=>`<div class="bar"><input id="q" placeholder="${t('search')}" value="${e(Q)}" oninput="Q=this.value;$('#ls').innerHTML=${f}()"><button class="pri" onclick="${n}()">＋</button></div><div id="ls">${eval(f)()}</div>`;
+const VW={
+fac:()=>`<section class="card"><h2>${C.id?'✎ '+C.no:t('newf')}</h2><div class="grid"><label>${t('c1')}<select onchange="C.cli=this.value"><option value="">${t('walk')}</option>${CL().map(c=>`<option value="${c.id}" ${c.id==C.cli?'selected':''}>${e(c.n)}${BAL[c.id]>0?' ('+m(BAL[c.id])+')':''}</option>`).join('')}</select></label>
+ <label>🔍 ${t('search')}<input id="sc" value="${e(Qf)}" autocomplete="off" oninput="Qf=this.value;$('#sr').innerHTML=sr()" onkeydown="if(event.key=='Enter'){event.preventDefault();sen()}"></label></div><div id="sr">${sr()}</div>
+ ${C.lines.map((l,i)=>`<div class="it bl"><div class="sp"><b>${e(l.n)}</b><button onclick="C.lines.splice(${i},1);R()">✕</button></div><div class="ln"><input type="number" min="0" step="any" inputmode="decimal" value="${l.q}" oninput="C.lines[${i}].q=+this.value;tot()"> × <input type="number" step="any" inputmode="decimal" value="${l.p}" oninput="C.lines[${i}].p=+this.value;tot()"> = <b id="lt${i}"></b></div></div>`).join('')}
+ <div class="tots"><label>${t('disc')}<input type="number" step="any" inputmode="decimal" value="${C.disc||''}" oninput="C.disc=+this.value;tot()"></label><label>${t('paid')}<input id="pd" type="number" step="any" inputmode="decimal" value="${C.paid}" oninput="C.paid=this.value;tot()"></label><div>${t('total')} : <b id="tt"></b> ${t('cur')}</div><div>${t('rest')} : <b id="rt"></b></div></div>
+ <div class="row"><button class="pri" onclick="saveF(1)">🖨 ${t('savep')}</button><button onclick="saveF()">${t('save')}</button><button onclick="C=blank();R()">${t('cancel')}</button></div></section>
+ <h2 class="h">${t('fac')}</h2>${L('f').sort((x,y)=>x.data.d<y.data.d?1:-1).slice(0,60).map(f=>`<div class="it bl"><div class="sp"><b>${f.data.no}</b><b>${m(f.data.total)} ${t('cur')}</b></div><small>${f.data.d} · ${e(f.data.cn)}</small>${f.data.rest>0?`<small class="neg">${t('rest')} : ${m(f.data.rest)}</small>`:''}<div class="row"><button onclick="pr('${f.id}')">🖨</button><button onclick="ef('${f.id}')">✎</button><button onclick="df('${f.id}')">🗑</button></div></div>`).join('')||`<p>${t('none')}</p>`}`,
+art:()=>bar('artL','ea'),cli:()=>bar('cliL','ec'),
+set:()=>`<div class="card"><h2>${t('hdr')}</h2><label><textarea id="hh" rows="5">${e(CF().h)}</textarea></label><img id="pv" class="pv" ${CF().logo?`src="${CF().logo}"`:'hidden'}><label>${t('logo')}<input type="file" accept="image/*" onchange="pick(this,400,v=>LOGO=v)"></label><div class="row"><button class="pri" onclick="ss()">${t('save')}</button><button onclick="LOGO='';$('#pv').hidden=true">✕ ${t('logo')}</button></div></div><div class="card"><button onclick="lo()">${t('lo')}</button></div>`};
+const LG=()=>`<form class="card lg" onsubmit="return go(this)"><h2>Nasser</h2>${SB.includes('VOTRE')?`<p class="neg">${t('cfg')}</p>`:''}<label>${t('user')}<input name="u" autocomplete="username" autocapitalize="off"></label><label>${t('pw')}<input name="p" type="password" autocomplete="current-password"></label><button class="pri" style="width:100%">${t('login')}</button><p id="le" class="neg"></p></form>`;
+function R(){calcS();document.documentElement.lang=D.lang;document.documentElement.dir=D.lang=='ar'?'rtl':'ltr';$('#lg').textContent=D.lang=='fr'?'العربية':'Français';
+ $('#nav').innerHTML=A?[['fac','🧾'],['art','📦'],['cli','👥'],['set','⚙️']].map(([k,i])=>`<button class="${V==k?'on':''}" onclick="nv('${k}')">${i}<span>${t(k)}</span></button>`).join(''):'';
+ $('#app').innerHTML=A?VW[V]():LG();if(A&&V=='fac')tot();stat()}
+(async()=>{try{const d=await idb(s=>s.get('d'));if(d)D={...D,...d}}catch(x){}R();sync();setInterval(sync,15000);addEventListener('online',sync);document.addEventListener('visibilitychange',()=>{if(!document.hidden)sync()});if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{})})();
+</script></body></html>
